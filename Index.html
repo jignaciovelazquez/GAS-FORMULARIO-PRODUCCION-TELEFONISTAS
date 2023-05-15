@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario Telefonistas</title>
+</head>
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+<body>
+
+
+    <div class="container-xxl text-center">
+
+        <div class="row p-2" style="background-color: #335EFF;">
+            <!-- HEADER-->
+            <div class="col-12 rounded bg-white">
+                <div class="row align-items-start">
+                    <div class="col-4 align-self-center">
+
+                        <img src='https://i.postimg.cc/rFYhmWT9/logo-GPSfull.png' border='0' alt='logo-GPSfull'
+                            class="img-fluid " style="max-height: 100px" />
+
+                    </div>
+
+                    <div class="col-6 align-self-center">
+                        <h3 style="color:black">Formulario Telefonistas</h3>
+                    </div>
+
+                    <div class="col-2 align-self-center d-none d-md-block">
+                        <h5 style="color:black">Al servicio de</h5>
+                        <img src="https://i.postimg.cc/gcsSCQBQ/telecentro-350x183.png" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- --------------------------------------BODY------------------------------------------------------------>
+            <div class="col-md-7 pt-3 pb-5" style="background-color: #C2CAE5;">
+
+                <form id="FORMULARIO" class="row g-2 needs-validation" onsubmit="return false" action="PRUEBA()"
+                    novalidate>
+
+                    <div class="col-12 position-relative">
+                        <div class="row">
+                            <div class="input-group col-sm-5">
+                                <label for="ID" class="col-sm-3 col-form-label text-start">ID:</label>
+                                <input type="text" class="form-control" id="ID" placeholder="Ingrese el ID" required>
+                                <button class="col-3 btn btn-primary" type="button" id="BUSCAR">
+                                    <span class="" id="SPINER_BUSCAR" role="status" aria-hidden="true"></span>
+                                    Buscar</button>
+                                <div class="invalid-tooltip">
+                                    ¡Debes ingresar el ID!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 position-relative">
+                        <div class="row">
+                            <label for="TLFNO" class="col-sm-3 col-form-label text-start">Telefono de
+                                Contacto:</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="TLFNO"
+                                    placeholder="Ingrese el numero de contacto" required>
+                                <div class="invalid-tooltip">
+                                    ¡Debes ingresar el numero de contacto!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 position-relative">
+                        <div class="row">
+                            <label for="TIPOLLAMADO" class="col-sm-3 col-form-label text-start">Tipo de Llamado:</label>
+                            <div class="col-sm-5">
+                                <select class="form-select" id="TIPOLLAMADO" required>
+                                    <option selected disabled value="">Seleccione</option>
+                                    <option value="ARELEVO">Agenda Relevo</option>
+                                    <option value="AOBRA">Agenda Obra</option>
+                                    <option value="QAPOBRA">QAP-OBRA</option>
+                                    <option value="QAPR">QAP-Relevo</option>
+                                    <option value="RECOORD">Recoordinación (Reagenda)</option>
+                                    <option value="CONFIR">Confirmación</option>
+                                    <option value="AVALI">Agenda de Validación</option>
+                                    <option value="ACCESO">Accesos</option>
+                                    <option value="CPOZO">Consulta de Pozo</option>
+                                    <option value="DCERTIF">Dudas en la Certificación</option>
+                                    <option value="FALTAD">Falta de Documentación</option>
+                                    <option value="OTROS">Otros</option>
+                                </select>
+                                <div class="invalid-tooltip">
+                                    ¡Debes ingresar el Tipo de Llamado!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-12 position-relative">
+                        <div class="row">
+                            <div class="input-group">
+                                <div class="col-3 text-start">
+                                    <label for="TELEF" class="col-form-label text-start">Telefonista</label>
+                                </div>
+                                <div class="col-6">
+                                    <input type="text" class="form-control" list="list_TELEF" id="TELEF"
+                                        placeholder="Seleccione">
+                                    <datalist id="list_TELEF" required>
+                                        <option value="2320 - Alejo Arribas">
+                                        <option value="2321 - Nestor Zarlenga">
+                                        <option value="2322 - Emanuel Ramirez">
+                                        <option value="2323 - Alejandra Suarez">
+                                        <option value="2325 - Catalina Solmi">
+                                        <option value="2326 - Adriana Espinola">
+                                        <option value="Emiliano">
+                                        <option value="Lucas">
+                                        <option value="Pablo">
+                                    </datalist>
+                                    <div class="invalid-tooltip">
+                                        ¡Debes Indicar el Telefonista!
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <select class="form-select" id="ROL" required>
+                                        <option selected disabled value="">Rol</option>
+                                        <option value="Rol 1">Rol 1</option>
+                                        <option value="Rol 2">Rol 2</option>
+                                        <option value="Rol 3">Rol 3</option>
+                                        <option value="Rol 4">Rol 4</option>
+                                        <option value="Rol 5">Rol 5</option>
+                                        <option value="Rol 6">Rol 6</option>
+                                        <option value="ROLNA">N/A</option>
+                                    </select>
+                                    <div class="invalid-tooltip">
+                                        ¡Debes Indicar el ROL!
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-12 position-relative">
+                        <div class="row">
+                            <label for="TGESTION" class="col-sm-3 col-form-label text-start">Tipo de Gestion:</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" list="list_GEST" id="TGESTION"
+                                    placeholder="Seleccione">
+                                <datalist id="list_GEST" required>
+                                    <option value="ARMADO (ORE)">
+                                    <option value="NORMALIZADO (ORE)">
+                                    <option value="RECONVERSION EDIFICIOS GPON">
+                                    <option value="N/A">
+                                </datalist>
+                                <div class="invalid-tooltip">
+                                    ¡Debes Indicar el ROL!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 position-relative">
+                        <div class="row">
+                            <label for="OBS" class="col-sm-3 col-form-label text-start">Observaciones
+                                Anteriores:</label>
+                            <div class="col-sm-12">
+                                <textarea id="OBS" class="form-control" id="exampleFormControlTextarea1"
+                                    rows="7"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-12 position-relative">
+                        <div class="row">
+                            <div class="input-group col-sm-9">
+                                <label for="ESTADO" class="col-sm-3 col-form-label text-start">Estado:</label>
+                                <button class="btn btn-success" type="button" id="AGENDADO">Agendado</button>
+                                <button class="btn btn-danger" type="button" id="NOCONTESTA">No Contesta</button>
+                                <select class="form-select" id="ESTADO" required>
+                                    <option selected disabled value="">Seleccione</option>
+                                    <option value="AGENDADO" disabled>Agendado</option>
+                                    <option value="NOCON">No Contesto (Buzón de Voz)</option>
+                                    <option value="LLAMAROTRAP">Contacto Solicitó llamar otra persona</option>
+                                    <option value="LLAMAROTRAV">Contacto Solicitó volver a llamar</option>
+                                    <option value="ROL5">Contacto Solicitó envío de Correo</option>
+                                    <option value="ROL6">Cliente Rechazó</option>
+                                    <option value="ROLNA">Agendado por Whatsapp</option>
+                                    <option value="ROLNA">Esquema de Contactación Completo</option>
+                                    <option value="ROLNA">Acceso Conseguido</option>
+                                    <option value="ROLNA">Acceso no Conseguido</option>
+                                </select>
+                                <div class="invalid-tooltip">
+                                    ¡Debes Indicar el ROL!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <section id="DATOSSEGUIRLLAMANDO" class="d-none">
+                        <div class="col-12 position-relative">
+                            <div class="input-group">
+                                <label for="OBS2" class="col-sm-3 col-form-label text-start">Observaciones:</label>
+                                <div class="col-sm-7">
+                                    <textarea id="OBS2" class="form-control" id="exampleFormControlTextarea1" rows="3"
+                                        required></textarea>
+                                </div>
+                                <button class="col-2 btn btn-primary" type="button" id="SEGUIR">Seguir Llamando</button>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="NUEVONUMERO" class="d-none">
+                        <div class="col-12 position-relative">
+                            <div class="row">
+                                <label for="TLFNO" class="col-sm-3 col-form-label text-start">Telefono de
+                                    Contacto:</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="TLFNO"
+                                        placeholder="Ingrese el numero de contacto" required>
+                                    <div class="invalid-tooltip">
+                                        ¡Debes ingresar el numero de contacto!
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-group col-sm-9 mt-2">
+                                    <label for="ESTADO" class="col-sm-3 col-form-label text-start">Estado:</label>
+                                    <button class="btn btn-success" type="button" id="AGENDADO">Agendado</button>
+                                    <button class="btn btn-danger" type="button" id="NOCONTESTA">No Contesta</button>
+                                    <select class="form-select" id="ESTADO" required>
+                                        <option selected disabled value="">Seleccione</option>
+                                        <option value="AGENDADO" disabled>Agendado</option>
+                                        <option value="NOCON">No Contesto (Buzón de Voz)</option>
+                                        <option value="LLAMAROTRAP">Contacto Solicitó llamar otra persona</option>
+                                        <option value="LLAMAROTRAV">Contacto Solicitó volver a llamar</option>
+                                        <option value="ROL5">Contacto Solicitó envío de Correo</option>
+                                        <option value="ROL6">Cliente Rechazó</option>
+                                        <option value="ROLNA">Agendado por Whatsapp</option>
+                                        <option value="ROLNA">Esquema de Contactación Completo</option>
+                                        <option value="ROLNA">Acceso Conseguido</option>
+                                        <option value="ROLNA">Acceso no Conseguido</option>
+                                    </select>
+                                    <div class="invalid-tooltip">
+                                        ¡Debes Indicar el ROL!
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </section>
+
+
+                    <section id="DATOSAGENDADO">
+                        <div class="col-12 position-relative">
+                            <div class="row">
+                                <label for="CONTACTO" class="col-sm-3 col-form-label text-start">Nombre de
+                                    Contacto:</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="CONTACTO"
+                                        placeholder="Ingrese el numero de contacto" required>
+                                    <div class="invalid-tooltip">
+                                        ¡Debes ingresar el numero de contacto!
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="PISOCONTACTO" class="col-sm-3 col-form-label text-start">Piso y
+                                    Dpto:</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" id="PISOCONTACTO"
+                                        placeholder="Ingrese Piso y Dpto" required>
+                                    <div class="invalid-tooltip">
+                                        ¡Debes ingresar el numero de contacto!
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="col-12 position-relative">
+                            <div class="row mt-1">
+                                <div class="input-group">
+                                    <div class="col-4 text-start">
+                                        <label for="HORARIO" class="col-form-label text-start">Franja Horaria de
+                                            Agendamiento</label>
+                                    </div>
+                                    <div class="col-3">
+                                        <input id="FECHA" type="date" class="form-control" required>
+                                        <div class="invalid-tooltip">
+                                            ¡Debes Seleccionar la Fecha!
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <input id="HORA1" type="text" class="form-control" required>
+                                        <div class="invalid-tooltip">
+                                            ¡Debes Seleccionar la franja horaria!
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 position-relative">
+                            <div class="row">
+                                <label for="OBS3" class="col-sm-3 col-form-label text-start">Observaciones:</label>
+                                <div class="col-sm-12">
+                                    <textarea id="OBS3" class="form-control" id="exampleFormControlTextarea1" rows="2"
+                                        required></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+
+
+                    <div class="col-12 pt-4">
+                        <div class="row">
+                            <div class="col-6 d-grid gap-2">
+                                <button id="GENERAR" type="submit" class="btn btn-success">GENERAR</button>
+
+                            </div>
+                            <div class="col-6 d-grid gap-2">
+                                <button id="BORRAR" type="button" class="btn btn-danger">BORRAR</button>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+
+
+            </div>
+
+
+            <div class="col-md-5 pt-3 pb-5" style="background-color: #979EB8;">
+
+                <div class="row">
+                    <div class="col-12 position-relative pt-2">
+                        <div class="col-sm-10 offset-sm-1 d-grid gap-2">
+                            <a id="IdEnConsulta"
+                                href="http://crm.telecentro.local//Edificio/ConsultaEdificioNew.aspx?SubMenu=4809"
+                                target="_blank" class="btn btn-primary" role="button">CRM - Consulta Edificio</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 position-relative pt-2">
+                        <div class="row">
+                            <label for="PARRAFO" class="col-sm-12 col-form-label fw-bold text-start">Comentario
+                                CRM:</label>
+                            <div class="col-sm-10 offset-sm-1">
+                                <textarea class="form-control" id="PARRAFO" rows="10"></textarea>
+                            </div>
+                            <div class="col-sm-10 pt-2 offset-sm-1 d-grid gap-2">
+                                <button id="COPIAR" type="button" class="btn btn-success">COPIAR</button>
+                            </div>
+                            <div class="col-sm-10 pt-2 offset-sm-1 d-grid gap-2 d-none">
+                                <button id="ENVIAR" type="button" class="btn btn-success">ENVIAR</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 position-relative pt-2">
+                        <div class="col-sm-10 offset-sm-1 d-grid gap-2">
+                            <a id="ObservacionEnConsulta"
+                                href="http://crm.telecentro.local//Edificio/Gt_Edificio/DatosComercialesNew.aspx?"
+                                target="_blank" class="btn btn-primary" role="button">CRM - Nueva Observación</a>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+        <!------------------------------------- ACCESOS RAPIDOS  --------------------------->
+        <div class="row" style="background-color: #ECF0F1;">
+            <div class="col mt-3 mb-3">
+                <div class="row">
+                    <div class="col-lg-1 d-grid">
+                        <input type="radio" class="btn-check" name="btnradio" id="btnradio0" autocomplete="off">
+                        <label class="btn btn-outline-warning" for="btnradio0">Inicio</label>
+                    </div>
+                    <div class="col-lg-1 d-grid">
+                        <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="btnradio1">Almuerzo</label>
+                    </div>
+                    <div class="col-lg-1 d-grid">
+                        <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="btnradio2">Reunion</label>
+                    </div>
+                    <div class="col-lg-1 d-grid">
+                        <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="btnradio3">Break</label>
+                    </div>
+                    <div class="col-lg-1 d-grid">
+                        <input type="radio" class="btn-check" name="btnradio" id="btnradio4" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="btnradio4">Permiso</label>
+                    </div>
+                    <div class="col-lg-1 d-grid">
+                        <input type="radio" class="btn-check" name="btnradio" id="btnradio5" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="btnradio5">Coaching - Inicio</label>
+                    </div>
+                    <div class="col-lg-1 d-grid">
+                        <input type="radio" class="btn-check" name="btnradio" id="btnradio6" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="btnradio6">Coaching - Fin</label>
+                    </div>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" id="COMENTARIO" placeholder="Comentario">
+                    </div>
+                    <div class="col-sm-2 d-grid gap-2">
+                        <button class="col btn btn-success" type="button" id="ENVIAR_TAREA">
+                            <span class="" id="SPINER_ENVIAR_TAREA" role="status" aria-hidden="true"></span>
+                            ENVIAR</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!------------------------------------------ FOOTER ------------------------------>
+        <div class="row" style="background-color: #335EFF;">
+            <div class="col align-self-center">
+                <div class="row mt-3">
+                    <div class="col-sm-12 ">
+                        <h6 style="color:white">Desarrollado por Gestion de Procesos y Servicios S.A. al servicio de
+                            TELECENTRO</h6>
+                    </div>
+                    <div class="row mt-">
+                        <div class="col-sm-6 offset-sm-3">
+                            <h6 style="color:white">By Ing. Ignacio Velazquez</h6>
+                        </div>
+                        <div class="col-sm-1 offset-sm-2">
+                            <h5 style="color:white">V1.0</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- JavaScript Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+            integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"
+            integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk"
+            crossorigin="anonymous"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="./JavaScript.html.js"></script>
+        <!---------<?!= include('JavaScript'); ?>---->
+
+</body>
+
+</html>
