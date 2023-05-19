@@ -12,6 +12,7 @@ function buscarID(id){
   let numeros =["1","2","3","4","5","6","7","8","9","0"];
   let roles =["Rol 1","Rol 2","Rol 3","Rol 4","Rol 5","Rol 6","Rol 7","Rol 8","Rol 9"];
   let idGestion;
+  let subAnalasis;
 
   let mailUser = BuscarUser();
   
@@ -26,9 +27,12 @@ function buscarID(id){
 
   if (Bandeja_ROL.indexOf(id) !== -1){
     let Bandeja_ROLTotal = HojaRol.getRange(2,1,UltimaFila_HojaRol,12).getValues();
+    let direccion = Bandeja_ROLTotal[Bandeja_ROL.indexOf(id)][1];
     let rol = Bandeja_ROLTotal[Bandeja_ROL.indexOf(id)][6];
     let tipogest = Bandeja_ROLTotal[Bandeja_ROL.indexOf(id)][4];
-    let observacion = Bandeja_ROLTotal[Bandeja_ROL.indexOf(id)][8];  
+    let observacion = Bandeja_ROLTotal[Bandeja_ROL.indexOf(id)][8];
+    subAnalasis = Bandeja_ROLTotal[Bandeja_ROL.indexOf(id)][7];
+    idGestion = Bandeja_ROLTotal[Bandeja_ROL.indexOf(id)][9];   
     
     let ubicacion = observacion.search(/\d{8}/);
     for (i=ubicacion;i<=observacion.length;i++){
@@ -36,8 +40,8 @@ function buscarID(id){
         numero+=observacion[i];
       }else{break}
     }
-    console.log("Se encontro en 2Export ",id,mailUser,rol,tipogest,numero,observacion,idGestion)
-    return [mailUser,rol,tipogest,numero,observacion,idGestion];
+    //console.log("Se encontro en 2Export ",id,mailUser,rol,tipogest,numero,observacion,idGestion,subAnalasis,direccion)
+    return [mailUser,rol,tipogest,numero,observacion,idGestion,subAnalasis,direccion];
   }else{
     const HojaRol = libro.getSheetByName("Asignaciones relevos");
     let ColumnaARol = HojaRol.getRange("A2:A");
@@ -46,10 +50,12 @@ function buscarID(id){
 
     if (Bandeja_ROL.indexOf(id) !== -1){
       let Bandeja_ROLTotal = HojaRol.getRange(2,1,UltimaFila_HojaRol,13).getValues();
+      let direccion = Bandeja_ROLTotal[Bandeja_ROL.indexOf(id)][1];
       let rol = Bandeja_ROLTotal[Bandeja_ROL.indexOf(id)][6];
-      rol =  rol.slice(0, 3) + " " + rol.slice(3);
+      //rol =  rol.slice(0, 3) + " " + rol.slice(3);
       let tipogest = Bandeja_ROLTotal[Bandeja_ROL.indexOf(id)][2];
       let observacion = Bandeja_ROLTotal[Bandeja_ROL.indexOf(id)][12]; 
+      subAnalasis = Bandeja_ROLTotal[Bandeja_ROL.indexOf(id)][5];
       idGestion = Bandeja_ROLTotal[Bandeja_ROL.indexOf(id)][7]; 
 
 
@@ -61,12 +67,12 @@ function buscarID(id){
       }
       
 
-      console.log("Se encontro en Asignaciones relevos ",id,mailUser,rol,tipogest,observacion,idGestion)
-      return [mailUser,rol,tipogest,numero,observacion,idGestion];
+      //console.log("Se encontro en Asignaciones relevos ",id,mailUser,rol,tipogest,observacion,idGestion,subAnalasis,direccion)
+      return [mailUser,rol,tipogest,numero,observacion,idGestion,subAnalasis,direccion];
 
   }else{
 
-      console.log("llego hasta Acceso/QAP/Record");
+      //console.log("llego hasta Acceso/QAP/Record");
       const HojaRol = libro.getSheetByName("Acceso/QAP/Record");
 
       let ColumnaARol = HojaRol.getRange("B3500:B");
@@ -74,11 +80,13 @@ function buscarID(id){
       let Bandeja_ROL = HojaRol.getRange(3500,2,UltimaFila_HojaRol,1).getValues().map(user => user[0].toString());
 
       if (Bandeja_ROL.indexOf(id) !== -1){
-        console.log("Vio el ID");
+        //console.log("Vio el ID");
         let Bandeja_ROLTotal = HojaRol.getRange(3500,2,UltimaFila_HojaRol,13).getValues();
+        let direccion = Bandeja_ROLTotal[Bandeja_ROL.indexOf(id)][1];
         let rol = "Rol 1";
         let tipogest = Bandeja_ROLTotal[Bandeja_ROL.indexOf(id)][2];
         let observacion = Bandeja_ROLTotal[Bandeja_ROL.indexOf(id)][8]; 
+        subAnalasis = Bandeja_ROLTotal[Bandeja_ROL.indexOf(id)][3];
 
         let ubicacion = observacion.search(/\d{8}/);
         for (i=ubicacion;i<=observacion.length;i++){
@@ -87,8 +95,8 @@ function buscarID(id){
           }else{break}
         }
 
-        console.log("Se encontro en Acceso/QAP/Record ",id,mailUser,rol,tipogest,observacion,idGestion)
-        return [mailUser,rol,tipogest,numero,observacion,idGestion];
+        //console.log("Se encontro en Acceso/QAP/Record ",id,mailUser,rol,tipogest,observacion,idGestion,subAnalasis,direccion)
+        return [mailUser,rol,tipogest,numero,observacion,idGestion,subAnalasis,direccion];
 
     }else{return["","","","",""]}
 
@@ -101,7 +109,7 @@ function buscarID(id){
 function Escribir(hora,telfcontacto,tipollamado,telefonista,id,estado,fechaagenda,numvt,motivorechazo,observacionadicional,fechaagendado,nombrecontecto,pisodpto,rol,cantclientesllamados,tipogestion){
   
   
-  console.log("Va a Escribir");
+  //console.log("Va a Escribir");
   let UltimaFila;
   const libro = SpreadsheetApp.openById("1L2RVTXg5DLpzWvbu202qGUxu2pRn4JRkAqH-NWhk05g");
   const Hoja = libro.getSheetByName("Respuestas de formulario 1");  
@@ -131,23 +139,10 @@ function BuscarUser(){
   }
 
   return userActivo
+}
 
-
-  /*
-  const libro = SpreadsheetApp.openById("1jxIyc4bekg-IFt7l618OZaXnh_ZOucvwc0iurRO779Y");
-  const Hoja = libro.getSheetByName("Hoja 1");  
-  var UltimaFila = Hoja.getLastRow();
-  //console.log("Ultima Fila:",UltimaFila)
-
-  var ColumnaA = Hoja.getRange("A1:A");
-  var UltimaFila2 = ColumnaA.getValues().filter(String).length;
-  //console.log("Ultima Fila2 :",UltimaFila2)
-
-  Hoja.getRange(UltimaFila2+1,1).setValue("userActivo");
-  console.log("userActivo")
-  Hoja.getRange(UltimaFila2+2,1).setValue(userActivo);
-  */
-
+function getScriptURL() {
+  return ScriptApp.getService().getUrl();
 }
 
 function include(filename){

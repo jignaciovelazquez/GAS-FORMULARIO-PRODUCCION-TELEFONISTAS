@@ -29,6 +29,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
 //Variables
 
+let cantLllamados = 1;
+
 
 //Eventos
 
@@ -41,22 +43,39 @@ document.getElementById("BUSCAR").addEventListener('click', () => {
     
     ActivarSpinerBuscar();
     document.getElementById("BUSCAR").disabled = true;
+    document.getElementById("BUSCAR").textContent = 'BUSCANDO...';
 
     let ID = document.getElementById("ID").value;
     google.script.run.withSuccessHandler(function (output) {
-        DesactivarSpinerBuscar();
         document.getElementById("BUSCAR").disabled = false;
-        console.log("Encontro: ",output)
+        document.getElementById("BUSCAR").textContent = 'BUSCAR';
+        //DesactivarSpinerBuscar();
+        //console.log("Encontro: ",output)
         document.getElementById("TELEF").value = output[0];
         document.getElementById("ROL").value = output[1];
         document.getElementById("TGESTION").value = output[2];
         document.getElementById("TLFNO").value = output[3];
         document.getElementById("OBS").value = output[4];
+        document.getElementById("OBS").value = output[4];
+        document.getElementById("SUBESTANALISIS").value = output[6];
+        document.getElementById("DIRECCION").value = output[7];
+
+        let largoOBS = Math.ceil(output[4].length/52);
+        if (largoOBS == 1){largoOBS=2;}
+        document.getElementById("OBS").rows = largoOBS;
+
+        let largoSUBESTANALISIS = Math.ceil(output[6].length/52);
+        document.getElementById("SUBESTANALISIS").rows = largoSUBESTANALISIS;
+
+
         document.getElementById("IdEnConsulta").href = "http://crm.telecentro.local//Edificio/ConsultaEdificioNew.aspx?edificioid="+ID;
+
         document.getElementById("ObservacionEnConsulta").href = "http://crm.telecentro.local//Edificio/Gt_Edificio/DatosComercialesNew.aspx?GtEdificioId="+output[5];
+
+        document.getElementById("AgendamientodeOrden").href = "http://crm.telecentro.local/Edificio/Gt_Edificio/AgendamientoOrdenes.aspx?GtEdificioId="+output[5]+"&EstadoGestionId=4&EdificioId="+ID+"&TipoGestionId=3";
         
         if ((output[1]=="Rol 5") || (output[1]=="Rol 6")){
-          document.getElementById("TIPOLLAMADO").value = "AOBRA";
+          document.getElementById("TIPOLLAMADO").value = "Agenda Obra";
         }
 
         
@@ -72,55 +91,68 @@ document.getElementById("BUSCAR").addEventListener('click', () => {
 
 
 document.getElementById("FORMULARIO").addEventListener('submit', () => {
-/*
-    if ((document.getElementById("ID").value == "") || (document.getElementById("DIRECCION").value == "") || (document.getElementById("HORA1").value == "") || (document.getElementById("HORA2").value == "") || (document.getElementById("FECHA").value == "") || (document.getElementById("OBS").value == "") || (document.getElementById("TELEF").value == "") || (document.getElementById("DESPACHO").value == "")){
-          alert("Debe completar todos los campos")
-          return
-        }
-*/
 
 
+    if (validarCampos()) {
+    alert("Debe completar todos los campos")
+    return
+    }else{
+
+        ActivarSpiner("SPINER_GENERAR");
         document.getElementById("GENERAR").disabled = true;
+        document.getElementById("GENERAR").textContent = 'Generando Formulario...';
 
 
         CampoID = document.getElementById("ID").value;
-        CampoTLFNO = document.getElementById("TLFNO").value;
         CampoTIPOLLAMADO = document.getElementById("TIPOLLAMADO").value;
         CampoTELEF = document.getElementById("TELEF").value;
         CampoROL = document.getElementById("ROL").value;
         CampoTGESTION = document.getElementById("TGESTION").value;
         CampoOBS = document.getElementById("OBS").value;
+        CampoTLFNO = document.getElementById("TLFNO").value;
         CampoESTADO = document.getElementById("ESTADO").value;
         CampoCONTACTO = document.getElementById("CONTACTO").value;
         CampoPISOCONTACTO = document.getElementById("PISOCONTACTO").value;
-        CampoHora1 = document.getElementById("HORA1").value;
+        CampoHora1 = document.getElementById("HORA1").value+":00";
         CampoFecha = document.getElementById("FECHA").value;
         CampoOBS3 = document.getElementById("OBS3").value;
 
         HORA = new Date().toLocaleString();
         DiaMes = "("+(new Date().getDate())+"/"+(new Date().getMonth()+1)+")"
         
-        FORMATO = `${DiaMes} - ${CampoTELEF.slice(0,4)} - Estado: ${CampoESTADO} - ${CampoCONTACTO} - ${CampoPISOCONTACTO} - Franja de agendamiento: ${CampoFecha} / ${CampoHora1}. Observación: ${CampoOBS3}.`;
+        FORMATO = `${DiaMes} - ${CampoTELEF.slice(0,4)} - Estado: ${CampoESTADO} - ${CampoCONTACTO} - ${CampoPISOCONTACTO} - Fecha de agendamiento: ${CampoFecha} a las ${CampoHora1}. Observación: ${CampoOBS3}.`;
 
         //CampoFhoraria = `${CampoHora1} a ${CampoHora2}`;
         //CampoTelefonista = `${CampoCodTelef} - ${CampoTelef}`;
 
         document.getElementById("PARRAFO").value = FORMATO;
 
-        console.log("ENTRO");
+        //console.log("ENTRO");
+
+        FechaAgenda = `${CampoFecha} ${CampoHora1}`;
+
+
 
         //google.script.run.Escribir(CampoID,CampoDireccion,CampoFhoraria,CampoTelefonista,CampoObs,CampoDespacho,HORA);
 
+
+        google.script.run.withSuccessHandler(function () {
         setTimeout(function(){ 
-          //window.alert("Gestión cargada correctamente");
-          document.getElementById("GENERAR").disabled = false;
-          }, 2000);
+            window.alert("Actividad cargada correctamente");
+            document.getElementById("GENERAR").disabled = false;
+            document.getElementById("GENERAR").textContent = 'GENERAR';
+            //DesactivarSpiner("SPINER_GENERAR");
+        }, 2000);
+        
+        }).Escribir(HORA,CampoTLFNO,CampoTIPOLLAMADO,CampoTELEF,CampoID,CampoESTADO,FechaAgenda ," "," ",CampoOBS3," ",CampoCONTACTO,CampoPISOCONTACTO,CampoROL,cantLllamados,CampoTGESTION);
 
-
+    }
 })
 
+
+
 document.getElementById("AGENDADO").addEventListener('click', () => {
-        document.getElementById("ESTADO").value = "AGENDADO";
+        document.getElementById("ESTADO").value = "Agendado";
         ActivarDatosAgendado();
         DesactivarDatosSeguirLlamando();
         DesactivarNuevoNumero();
@@ -129,16 +161,50 @@ document.getElementById("AGENDADO").addEventListener('click', () => {
 })
 
 document.getElementById("NOCONTESTA").addEventListener('click', () => {
-        document.getElementById("ESTADO").value = "NOCON";
-        ActivarDatosSeguirLlamando();
-        DesactivarDatosAgendado();
+    ActivarDatosSeguirLlamando();
+    DesactivarDatosAgendado();
+    
+    document.getElementById("ESTADO").value = "No Contesto (Buzón de Voz)";
 
 })
+
 
 document.getElementById("SEGUIR").addEventListener('click', () => {
-        ActivarNuevoNumero();
 
+    if (validarCampos2()) {
+    alert("Debe completar todos los campos")
+    return
+    }else{
+
+        CampoID = document.getElementById("ID").value;
+        CampoTIPOLLAMADO = document.getElementById("TIPOLLAMADO").value;
+        CampoTELEF = document.getElementById("TELEF").value;
+        CampoROL = document.getElementById("ROL").value;
+        CampoTGESTION = document.getElementById("TGESTION").value;
+
+        CampoTLFNO = document.getElementById("TLFNO").value;
+        CampoESTADO = document.getElementById("ESTADO").value;
+        CampoOBS2 = document.getElementById("OBS2").value;
+
+        guardarLlamadoPrevio();
+        document.getElementById("SEGUIR").disabled = true;
+        document.getElementById("SEGUIR").textContent = 'Generando Formulario...';
+
+        //ActivarNuevoNumero();
+
+        HORA = new Date().toLocaleString();
+
+        google.script.run.withSuccessHandler(function () {
+
+          document.getElementById("SEGUIR").disabled = false;
+          document.getElementById("SEGUIR").textContent = 'Seguir Llamando';
+          cantLllamados += 1;
+        
+        }).Escribir(HORA,CampoTLFNO,CampoTIPOLLAMADO,CampoTELEF,CampoID,CampoESTADO," "," "," ",CampoOBS2," "," "," ",CampoROL,cantLllamados,CampoTGESTION);
+
+    }
 })
+
 
 
 document.getElementById("COPIAR").addEventListener('click', () => {
@@ -159,12 +225,13 @@ document.getElementById("ENVIAR_TAREA").addEventListener('click', () => {
         return
     }
     
-    ActivarSpinerEnviarTarea();
+    ActivarSpiner("SPINER_ENVIAR_TAREA");
     document.getElementById("ENVIAR_TAREA").disabled = true;
+    document.getElementById("ENVIAR_TAREA").textContent = 'Generando Formulario...';
     let comentario = "Sin Comentario";
 
     google.script.run.withSuccessHandler(function (output) {
-        console.log("Encontro: ",output)
+        //console.log("Encontro: ",output)
         CampoTELEF = output;
 
 
@@ -219,13 +286,14 @@ document.getElementById("ENVIAR_TAREA").addEventListener('click', () => {
 
 
     HORA = new Date().toLocaleString();
-    console.log("Hora: ",HORA);
+    //console.log("Hora: ",HORA);
 
     google.script.run.withSuccessHandler(function () {
       setTimeout(function(){ 
           window.alert("Actividad cargada correctamente");
           document.getElementById("ENVIAR_TAREA").disabled = false;
-          DesactivarSpinerEnviarTarea();
+          document.getElementById("ENVIAR_TAREA").textContent = 'ENVIAR';
+          //DesactivarSpiner("SPINER_ENVIAR_TAREA");
           document.getElementById("btnradio0").checked = false;
           document.getElementById("btnradio1").checked = false;
           document.getElementById("btnradio2").checked = false;
@@ -250,13 +318,13 @@ document.getElementById("ENVIAR_TAREA").addEventListener('click', () => {
 
 })
 //-----------------------------------------------------------------------------------------------------------
-
-document.getElementById("ENVIAR").addEventListener('click', () => {
+/*
+document.getElementById("ENVIAR_WASAP").addEventListener('click', () => {
 
   abrirNuevoTab('https://api.whatsapp.com/send?&text='+`@${CampoTelef} => ID: ${CampoID} Dirección: ${CampoDireccion} Telefonista: ${CampoCodTelef} - ${CampoTelef} Franja horaria de agendamiento: ${CampoHora1} a ${CampoHora2} - ${CampoFecha} Observación: ${CampoObs}\n`)
 
       })
-
+*/
 
 
 document.getElementById("BORRAR").addEventListener('click',()=> {
@@ -274,17 +342,47 @@ function abrirNuevoTab(url) {
 }
 
 function limpiar(){
-        document.getElementById("ID").value = "";
-        document.getElementById("DIRECCION").value = "";
-        document.getElementById("HORA1").value = "";
-        document.getElementById("HORA2").value = "";
-        document.getElementById("FECHA").value = "";
-        document.getElementById("OBS").value = "";
-        document.getElementById("TELEF").value = "";
-        document.getElementById("TELEFONISTA").value = "";
-        document.getElementById("DESPACHO").value = "";
 
-        }
+  google.script.run.withSuccessHandler(function() {
+    window.open("https://script.google.com/macros/s/AKfycbzTJr06wVqeMcIFvgpWnWsIplL9saDeI1Vxlj6k3WA/dev",'_top');
+    }).getScriptURL();
+
+  //location.reload(true);
+
+}
+
+//function actualizar(){location.reload(true);}
+//Función para actualizar cada 5 segundos(5000 milisegundos)
+//setInterval("actualizar()",5000);
+
+function guardarLlamadoPrevio(){
+
+    CampoTLFNO = document.getElementById("TLFNO").value;
+    CampoESTADO = document.getElementById("ESTADO").value;
+    CampoOBS2 = document.getElementById("OBS2").value;
+
+    const LlamadoPrevio = document.createElement('DIV');
+    const ContenedorPadre = document.getElementById("LLAMADOSANTERIORES");
+
+
+    LlamadoPrevio.innerHTML = `<div class="row">
+                                    <div class="col-sm-12">
+                                        <textarea class="form-control" id="LLAMADO${cantLllamados}"rows="5" disabled></textarea>
+                                    </div>
+                                </div>
+                                    
+                                    `;
+    ContenedorPadre.append(LlamadoPrevio);
+
+    FORMATO = `Llamado Previo N: ${cantLllamados} \nTelf. Contactado: ${CampoTLFNO} \nEstado de Contacto: ${CampoESTADO} \nObservacion: ${CampoOBS2}.`;
+
+    document.getElementById("LLAMADO" + cantLllamados).value = FORMATO;
+
+    document.getElementById("TLFNO").value = "";
+    document.getElementById("ESTADO").value = "";
+    document.getElementById("OBS2").value = "";
+
+}
 
 const ModoInicio = () => {
     DesactivarDatosAgendado();
@@ -321,13 +419,6 @@ const DesactivarNuevoNumero = () => {
 }
 
 
-
-
-
-
-
-
-
 const ActivarSpinerBuscar = () => {
     document.getElementById("SPINER_BUSCAR").classList.add("spinner-border");
     document.getElementById("SPINER_BUSCAR").classList.add("spinner-border-sm");
@@ -338,16 +429,27 @@ const DesactivarSpinerBuscar = () => {
     document.getElementById("SPINER_BUSCAR").classList.remove("spinner-border-sm");
 }
 
-const ActivarSpinerEnviarTarea = () => {
-    document.getElementById("SPINER_ENVIAR_TAREA").classList.add("spinner-border");
-    document.getElementById("SPINER_ENVIAR_TAREA").classList.add("spinner-border-sm");
+const ActivarSpiner = (SPINER) => {
+    document.getElementById(SPINER).classList.add("spinner-border");
+    document.getElementById(SPINER).classList.add("spinner-border-sm");
 }
 
-const DesactivarSpinerEnviarTarea = () => {
-    document.getElementById("SPINER_ENVIAR_TAREA").classList.remove("spinner-border");
-    document.getElementById("SPINER_ENVIAR_TAREA").classList.remove("spinner-border-sm");
+const DesactivarSpiner = (SPINER) => {
+    document.getElementById(SPINER).classList.remove("spinner-border");
+    document.getElementById(SPINER).classList.remove("spinner-border-sm");
 }
 
+function validarCampos() {
+    if ((document.getElementById("ID").value == "") || (document.getElementById("TIPOLLAMADO").value == "") || (document.getElementById("ROL").value == "") || (document.getElementById("TGESTION").value == "") || (document.getElementById("TLFNO").value == "") || (document.getElementById("ESTADO").value == "") || (document.getElementById("CONTACTO").value == "") || (document.getElementById("PISOCONTACTO").value == "") || (document.getElementById("HORA1").value == "") || (document.getElementById("FECHA").value == "") || (document.getElementById("OBS3").value == "")) {
+        return true
+    }
+}
+
+function validarCampos2() {
+    if ((document.getElementById("ID").value == "") || (document.getElementById("TIPOLLAMADO").value == "") || (document.getElementById("ROL").value == "") || (document.getElementById("TGESTION").value == "") || (document.getElementById("TLFNO").value == "") || (document.getElementById("ESTADO").value == "") || (document.getElementById("OBS2").value == "")) {
+        return true
+    }
+}
 
 
 /*

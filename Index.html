@@ -63,17 +63,12 @@
 
                     <div class="col-12 position-relative">
                         <div class="row">
-                            <label for="TLFNO" class="col-sm-3 col-form-label text-start">Telefono de
-                                Contacto:</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" id="TLFNO"
-                                    placeholder="Ingrese el numero de contacto" required>
-                                <div class="invalid-tooltip">
-                                    ¡Debes ingresar el numero de contacto!
-                                </div>
+                            <div class="col-sm-9 offset-md-3">
+                                <textarea id="DIRECCION" class="form-control" rows="1" disabled></textarea>
                             </div>
                         </div>
                     </div>
+
 
                     <div class="col-12 position-relative">
                         <div class="row">
@@ -81,18 +76,18 @@
                             <div class="col-sm-5">
                                 <select class="form-select" id="TIPOLLAMADO" required>
                                     <option selected disabled value="">Seleccione</option>
-                                    <option value="ARELEVO">Agenda Relevo</option>
-                                    <option value="AOBRA">Agenda Obra</option>
-                                    <option value="QAPOBRA">QAP-OBRA</option>
-                                    <option value="QAPR">QAP-Relevo</option>
-                                    <option value="RECOORD">Recoordinación (Reagenda)</option>
-                                    <option value="CONFIR">Confirmación</option>
-                                    <option value="AVALI">Agenda de Validación</option>
-                                    <option value="ACCESO">Accesos</option>
-                                    <option value="CPOZO">Consulta de Pozo</option>
-                                    <option value="DCERTIF">Dudas en la Certificación</option>
-                                    <option value="FALTAD">Falta de Documentación</option>
-                                    <option value="OTROS">Otros</option>
+                                    <option value="Agenda Relevo">Agenda Relevo</option>
+                                    <option value="Agenda Obra">Agenda Obra</option>
+                                    <option value="QAP-Obra">QAP-Obra</option>
+                                    <option value="QAP-Relevo">QAP-Relevo</option>
+                                    <option value="Recoordinacion (Reagenda)">Recoordinación (Reagenda)</option>
+                                    <option value="Confirmacion">Confirmación</option>
+                                    <option value="Agenda de Validacion">Agenda de Validación</option>
+                                    <option value="Accesos">Accesos</option>
+                                    <option value="Consulta de Pozo">Consulta de Pozo</option>
+                                    <option value="Dudas en la Certificacion">Dudas en la Certificación</option>
+                                    <option value="Falta de Documentacion">Falta de Documentación</option>
+                                    <option value="Otros">Otros</option>
                                 </select>
                                 <div class="invalid-tooltip">
                                     ¡Debes ingresar el Tipo de Llamado!
@@ -111,17 +106,18 @@
                                 </div>
                                 <div class="col-6">
                                     <input type="text" class="form-control" list="list_TELEF" id="TELEF"
-                                        placeholder="Seleccione">
-                                    <datalist id="list_TELEF" required>
+                                        placeholder="Seleccione" required>
+                                    <datalist id="list_TELEF">
                                         <option value="2320 - Alejo Arribas">
                                         <option value="2321 - Nestor Zarlenga">
                                         <option value="2322 - Emanuel Ramirez">
                                         <option value="2323 - Alejandra Suarez">
                                         <option value="2325 - Catalina Solmi">
                                         <option value="2326 - Adriana Espinola">
-                                        <option value="Emiliano">
-                                        <option value="Lucas">
-                                        <option value="Pablo">
+                                        <option value="2327 - Adriana Ramundo">
+                                        <option value="1003 - Lucas">
+                                        <option value="1002 - Emiliano">
+                                        <option value="1001 - Carlos">
                                     </datalist>
                                     <div class="invalid-tooltip">
                                         ¡Debes Indicar el Telefonista!
@@ -136,6 +132,7 @@
                                         <option value="Rol 4">Rol 4</option>
                                         <option value="Rol 5">Rol 5</option>
                                         <option value="Rol 6">Rol 6</option>
+                                        <option value="Rol 7">Rol 7</option>
                                         <option value="ROLNA">N/A</option>
                                     </select>
                                     <div class="invalid-tooltip">
@@ -152,15 +149,15 @@
                             <label for="TGESTION" class="col-sm-3 col-form-label text-start">Tipo de Gestion:</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" list="list_GEST" id="TGESTION"
-                                    placeholder="Seleccione">
-                                <datalist id="list_GEST" required>
+                                    placeholder="Seleccione" required>
+                                <datalist id="list_GEST">
                                     <option value="ARMADO (ORE)">
                                     <option value="NORMALIZADO (ORE)">
                                     <option value="RECONVERSION EDIFICIOS GPON">
                                     <option value="N/A">
                                 </datalist>
                                 <div class="invalid-tooltip">
-                                    ¡Debes Indicar el ROL!
+                                    ¡Debes Indicar el Tipo de Gestion!
                                 </div>
                             </div>
                         </div>
@@ -168,11 +165,36 @@
 
                     <div class="col-12 position-relative">
                         <div class="row">
-                            <label for="OBS" class="col-sm-3 col-form-label text-start">Observaciones
-                                Anteriores:</label>
+                            <label for="SUBESTANALISIS" class="col-sm-5 col-form-label text-start">Sub estado
+                                análisis</label>
                             <div class="col-sm-12">
-                                <textarea id="OBS" class="form-control" id="exampleFormControlTextarea1"
-                                    rows="7"></textarea>
+                                <textarea id="SUBESTANALISIS" class="form-control" rows="1"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 position-relative">
+                        <div class="row">
+                            <label for="OBS" class="col-sm-5 col-form-label text-start">Observación Análisis:</label>
+                            <div class="col-sm-12">
+                                <textarea id="OBS" class="form-control" rows="4"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="LLAMADOSANTERIORES" class="col-12 position-relative">
+                    </div>
+
+                    <div class="col-12 position-relative">
+                        <div class="row">
+                            <label for="TLFNO" class="col-sm-3 col-form-label text-start">Telefono de
+                                Contacto:</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="TLFNO"
+                                    placeholder="Ingrese el numero de contacto" required>
+                                <div class="invalid-tooltip">
+                                    ¡Debes ingresar el numero de contacto!
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -183,27 +205,30 @@
                             <div class="input-group col-sm-9">
                                 <label for="ESTADO" class="col-sm-3 col-form-label text-start">Estado:</label>
                                 <button class="btn btn-success" type="button" id="AGENDADO">Agendado</button>
-                                <button class="btn btn-danger" type="button" id="NOCONTESTA">No Contesta</button>
+                                <button class="btn btn-danger" type="button" id="NOCONTESTA">No Agendado</button>
                                 <select class="form-select" id="ESTADO" required>
                                     <option selected disabled value="">Seleccione</option>
-                                    <option value="AGENDADO" disabled>Agendado</option>
-                                    <option value="NOCON">No Contesto (Buzón de Voz)</option>
-                                    <option value="LLAMAROTRAP">Contacto Solicitó llamar otra persona</option>
-                                    <option value="LLAMAROTRAV">Contacto Solicitó volver a llamar</option>
-                                    <option value="ROL5">Contacto Solicitó envío de Correo</option>
-                                    <option value="ROL6">Cliente Rechazó</option>
-                                    <option value="ROLNA">Agendado por Whatsapp</option>
-                                    <option value="ROLNA">Esquema de Contactación Completo</option>
-                                    <option value="ROLNA">Acceso Conseguido</option>
-                                    <option value="ROLNA">Acceso no Conseguido</option>
+                                    <option value="Agendado" disabled>Agendado</option>
+                                    <option value="No Contesto (Buzón de Voz)">No Contesto (Buzón de Voz)</option>
+                                    <option value="Contacto Solicitó llamar otra persona">Contacto Solicitó llamar otra
+                                        persona</option>
+                                    <option value="Contacto Solicitó volver a llamar">Contacto Solicitó volver a llamar
+                                    </option>
+                                    <option value="Contacto Solicitó envío de Correo">Contacto Solicitó envío de Correo
+                                    </option>
+                                    <option value="Cliente Rechazo">Cliente Rechazó</option>
+                                    <option value="Agendado por Whatsapp">Agendado por Whatsapp</option>
+                                    <option value="Esquema de Contactación Completo">Esquema de Contactación Completo
+                                    </option>
+                                    <option value="Acceso Conseguido">Acceso Conseguido</option>
+                                    <option value="Acceso no Conseguido">Acceso no Conseguido</option>
                                 </select>
                                 <div class="invalid-tooltip">
-                                    ¡Debes Indicar el ROL!
+                                    ¡Debes Indicar el resultado del Agendamiento!
                                 </div>
                             </div>
                         </div>
                     </div>
-
 
 
                     <section id="DATOSSEGUIRLLAMANDO" class="d-none">
@@ -267,9 +292,9 @@
                                     Contacto:</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id="CONTACTO"
-                                        placeholder="Ingrese el numero de contacto" required>
+                                        placeholder="Ingrese el Nombre de contacto" required>
                                     <div class="invalid-tooltip">
-                                        ¡Debes ingresar el numero de contacto!
+                                        ¡Debes ingresar el Nombre del contacto!
                                     </div>
                                 </div>
                             </div>
@@ -280,7 +305,7 @@
                                     <input type="text" class="form-control" id="PISOCONTACTO"
                                         placeholder="Ingrese Piso y Dpto" required>
                                     <div class="invalid-tooltip">
-                                        ¡Debes ingresar el numero de contacto!
+                                        ¡Debes ingresar el Piso y Dpto del contacto!
                                     </div>
                                 </div>
                             </div>
@@ -318,6 +343,9 @@
                                 <div class="col-sm-12">
                                     <textarea id="OBS3" class="form-control" id="exampleFormControlTextarea1" rows="2"
                                         required></textarea>
+                                    <div class="invalid-tooltip">
+                                        ¡Debes Ingresar una Observacion de Agendamiento!
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -328,7 +356,9 @@
                     <div class="col-12 pt-4">
                         <div class="row">
                             <div class="col-6 d-grid gap-2">
-                                <button id="GENERAR" type="submit" class="btn btn-success">GENERAR</button>
+                                <button class="col btn btn-success" type="submit" id="GENERAR">
+                                    <span class="" id="SPINER_GENERAR" role="status" aria-hidden="true"></span>
+                                    GENERAR</button>
 
                             </div>
                             <div class="col-6 d-grid gap-2">
@@ -336,6 +366,10 @@
 
                             </div>
                         </div>
+                    </div>
+
+                    <div class="col-sm-2 d-grid gap-2">
+
                     </div>
 
                 </form>
@@ -376,11 +410,21 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-12 position-relative pt-2">
+                    <div class="col-12 position-relative pt-3">
                         <div class="col-sm-10 offset-sm-1 d-grid gap-2">
                             <a id="ObservacionEnConsulta"
                                 href="http://crm.telecentro.local//Edificio/Gt_Edificio/DatosComercialesNew.aspx?"
                                 target="_blank" class="btn btn-primary" role="button">CRM - Nueva Observación</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 position-relative pt-3">
+                        <div class="col-sm-10 offset-sm-1 d-grid gap-2">
+                            <a id="AgendamientodeOrden"
+                                href="http://crm.telecentro.local/Edificio/Gt_Edificio/BandejaEntradaDeRelevamiento.aspx?TituloPantalla=Planificaci%C3%B3n%20de%20Tareas&EstadoGestionId=9&TipoGestionId=3&TipoGestion=OPERACIONES%20DE%20RED%20-%20PLANIFICACION%20DE%20TAREAS"
+                                target="_blank" class="btn btn-primary" role="button">CRM - Agendamiento de Orden</a>
                         </div>
                     </div>
                 </div>
@@ -452,7 +496,6 @@
                 </div>
             </div>
         </div>
-
 
 
         <!-- JavaScript Bundle with Popper -->
