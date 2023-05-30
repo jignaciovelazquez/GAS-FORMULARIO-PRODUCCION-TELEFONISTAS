@@ -199,6 +199,19 @@
                         </div>
                     </div>
 
+                    <div class="col-12 position-relative">
+                        <div class="row">
+                            <label for="NCLIENTE" class="col-sm-3 col-form-label text-start">Nro de Cliente:</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="NCLIENTE"
+                                    placeholder="Ingrese el numero de cliente" required>
+                                <div class="invalid-tooltip">
+                                    ¡Debes ingresar el numero de cliente!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
 
                     <div class="col-12 position-relative">
                         <div class="row">
@@ -355,14 +368,21 @@
 
                     <div class="col-12 pt-4">
                         <div class="row">
-                            <div class="col-6 d-grid gap-2">
-                                <button class="col btn btn-success" type="submit" id="GENERAR">
+                            <div class="col-4 d-grid gap-2">
+                                <button class="col btn btn-success" type="submit" id="GENERARLOGRADO">
                                     <span class="" id="SPINER_GENERAR" role="status" aria-hidden="true"></span>
-                                    GENERAR</button>
+                                    GENERAR LOGRADO</button>
 
                             </div>
-                            <div class="col-6 d-grid gap-2">
-                                <button id="BORRAR" type="button" class="btn btn-danger">BORRAR</button>
+                            <div class="col-4 d-grid gap-2">
+                                <button class="col btn btn-danger" type="button" id="GENERARRECHAZADO">
+                                    <span class="" id="SPINER_GENERAR_RECHAZADO" role="status"
+                                        aria-hidden="true"></span>
+                                    GENERAR RECHAZADO</button>
+
+                            </div>
+                            <div class="col-4 d-grid gap-2">
+                                <button id="BORRAR" type="button" class="btn btn-warning">BORRAR</button>
 
                             </div>
                         </div>
